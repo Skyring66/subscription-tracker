@@ -59,7 +59,7 @@ export function SubscriptionRow({
             </a>
           )}
         </td>
-        <td className="px-4 py-3 text-right font-mono">
+        <td className="px-4 py-3 text-right font-mono text-gray-900">
           {sym}
           {Number(subscription.amount).toFixed(2)}
         </td>
