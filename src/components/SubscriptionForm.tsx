@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { Subscription } from "@/lib/types";
 
 interface Props {
-  action: (formData: FormData) => Promise<void>;
+  action: (formData: FormData) => Promise<{ error: string | null } | void>;
   onClose: () => void;
   title: string;
   subscription?: Subscription;
@@ -17,8 +17,12 @@ export function SubscriptionForm({ action, onClose, title, subscription }: Props
   async function handleSubmit(formData: FormData) {
     setSubmitting(true);
     try {
-      await action(formData);
-      onClose();
+      const result = await action(formData);
+      if (result?.error) {
+        alert(result.error);
+      } else {
+        onClose();
+      }
     } catch (e) {
       alert(e instanceof Error ? e.message : "Something went wrong");
     } finally {

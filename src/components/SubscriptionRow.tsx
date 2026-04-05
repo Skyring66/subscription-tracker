@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { Subscription } from "@/lib/types";
 import {
   updateSubscription,
@@ -33,7 +34,8 @@ export function SubscriptionRow({
     fd.set("id", subscription.id);
     fd.set("name", subscription.name);
     try {
-      await deleteSubscription(fd);
+      const result = await deleteSubscription(fd);
+      if (result?.error) alert(result.error);
     } catch (e) {
       alert(e instanceof Error ? e.message : "Failed to delete");
     } finally {
@@ -90,14 +92,16 @@ export function SubscriptionRow({
           </button>
         </td>
       </tr>
-      {editing && (
-        <SubscriptionForm
-          action={updateSubscription}
-          onClose={() => setEditing(false)}
-          title="Edit Subscription"
-          subscription={subscription}
-        />
-      )}
+      {editing &&
+        createPortal(
+          <SubscriptionForm
+            action={updateSubscription}
+            onClose={() => setEditing(false)}
+            title="Edit Subscription"
+            subscription={subscription}
+          />,
+          document.body
+        )}
     </>
   );
 }

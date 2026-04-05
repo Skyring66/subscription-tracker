@@ -10,7 +10,7 @@ export async function addSubscription(formData: FormData) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) throw new Error("Not authenticated");
+  if (!user) return { error: "Not authenticated" };
 
   const name = formData.get("name") as string;
   const amount = parseFloat(formData.get("amount") as string);
@@ -31,7 +31,7 @@ export async function addSubscription(formData: FormData) {
     payment_method,
   });
 
-  if (error) throw new Error(error.message);
+  if (error) return { error: error.message };
 
   await supabase.from("activity_log").insert({
     user_id: user.id,
@@ -41,6 +41,7 @@ export async function addSubscription(formData: FormData) {
   });
 
   revalidatePath("/dashboard");
+  return { error: null };
 }
 
 export async function updateSubscription(formData: FormData) {
@@ -49,7 +50,7 @@ export async function updateSubscription(formData: FormData) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) throw new Error("Not authenticated");
+  if (!user) return { error: "Not authenticated" };
 
   const id = formData.get("id") as string;
   const name = formData.get("name") as string;
@@ -65,7 +66,7 @@ export async function updateSubscription(formData: FormData) {
     .update({ name, amount, currency, period, renewal_date, url, payment_method })
     .eq("id", id);
 
-  if (error) throw new Error(error.message);
+  if (error) return { error: error.message };
 
   await supabase.from("activity_log").insert({
     user_id: user.id,
@@ -75,6 +76,7 @@ export async function updateSubscription(formData: FormData) {
   });
 
   revalidatePath("/dashboard");
+  return { error: null };
 }
 
 export async function deleteSubscription(formData: FormData) {
@@ -83,7 +85,7 @@ export async function deleteSubscription(formData: FormData) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) throw new Error("Not authenticated");
+  if (!user) return { error: "Not authenticated" };
 
   const id = formData.get("id") as string;
   const name = formData.get("name") as string;
@@ -93,7 +95,7 @@ export async function deleteSubscription(formData: FormData) {
     .delete()
     .eq("id", id);
 
-  if (error) throw new Error(error.message);
+  if (error) return { error: error.message };
 
   await supabase.from("activity_log").insert({
     user_id: user.id,
@@ -103,4 +105,5 @@ export async function deleteSubscription(formData: FormData) {
   });
 
   revalidatePath("/dashboard");
+  return { error: null };
 }
