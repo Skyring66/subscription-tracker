@@ -9,6 +9,7 @@ export interface Subscription {
   period: Period;
   renewal_date: string;
   url: string | null;
+  payment_method: string | null;
   created_at: string;
   updated_at: string;
 }

@@ -71,6 +71,9 @@ export function SubscriptionRow({
             year: "numeric",
           })}
         </td>
+        <td className="px-4 py-3 text-gray-600">
+          {subscription.payment_method || "—"}
+        </td>
         <td className="px-4 py-3 text-right">
           <button
             onClick={() => setEditing(true)}

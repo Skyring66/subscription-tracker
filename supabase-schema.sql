@@ -10,6 +10,7 @@ create table public.subscriptions (
   period text not null check (period in ('daily', 'weekly', 'monthly', 'quarterly', 'yearly')),
   renewal_date date not null,
   url text,
+  payment_method text,
   created_at timestamptz default now() not null,
   updated_at timestamptz default now() not null
 );

@@ -35,6 +35,9 @@ export function SubscriptionList({
               <th className="text-left px-4 py-3 font-medium text-gray-600">
                 Renewal
               </th>
+              <th className="text-left px-4 py-3 font-medium text-gray-600">
+                Payment
+              </th>
               <th className="text-right px-4 py-3 font-medium text-gray-600">
                 Actions
               </th>

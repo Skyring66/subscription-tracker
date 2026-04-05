@@ -44,7 +44,7 @@ export function SubscriptionForm({ action, onClose, title, subscription }: Props
               type="text"
               required
               defaultValue={subscription?.name}
-              className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="e.g. Netflix"
             />
           </div>
@@ -61,7 +61,7 @@ export function SubscriptionForm({ action, onClose, title, subscription }: Props
                 min="0"
                 required
                 defaultValue={subscription?.amount}
-                className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full rounded-lg border px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="9.99"
               />
             </div>
@@ -72,7 +72,7 @@ export function SubscriptionForm({ action, onClose, title, subscription }: Props
               <select
                 name="currency"
                 defaultValue={subscription?.currency || "GBP"}
-                className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full rounded-lg border px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="GBP">GBP (&pound;)</option>
                 <option value="USD">USD ($)</option>
@@ -91,7 +91,7 @@ export function SubscriptionForm({ action, onClose, title, subscription }: Props
             <select
               name="period"
               defaultValue={subscription?.period || "monthly"}
-              className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="daily">Daily</option>
               <option value="weekly">Weekly</option>
@@ -110,7 +110,7 @@ export function SubscriptionForm({ action, onClose, title, subscription }: Props
               type="date"
               required
               defaultValue={subscription?.renewal_date}
-              className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -122,9 +122,30 @@ export function SubscriptionForm({ action, onClose, title, subscription }: Props
               name="url"
               type="url"
               defaultValue={subscription?.url || ""}
-              className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="https://..."
             />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Payment Method (optional)
+            </label>
+            <select
+              name="payment_method"
+              defaultValue={subscription?.payment_method || ""}
+              className="w-full rounded-lg border px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">-- Select --</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="PayPal">PayPal</option>
+              <option value="Bank Transfer">Bank Transfer</option>
+              <option value="Direct Debit">Direct Debit</option>
+              <option value="Apple Pay">Apple Pay</option>
+              <option value="Google Pay">Google Pay</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
 
           <div className="flex justify-end gap-3 pt-2">
