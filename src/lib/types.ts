@@ -10,6 +10,7 @@ export interface Subscription {
   renewal_date: string;
   url: string | null;
   payment_method: string | null;
+  notes: string | null;
   created_at: string;
   updated_at: string;
 }

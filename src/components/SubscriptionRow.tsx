@@ -8,6 +8,8 @@ import {
   deleteSubscription,
 } from "@/app/dashboard/actions";
 import { SubscriptionForm } from "./SubscriptionForm";
+import { ServiceIcon } from "./ServiceIcon";
+import { NotesPopover } from "./NotesPopover";
 
 const CURRENCY_SYMBOLS: Record<string, string> = {
   GBP: "\u00a3",
@@ -47,17 +49,27 @@ export function SubscriptionRow({
     <>
       <tr className="hover:bg-gray-50">
         <td className="px-4 py-3">
-          <div className="font-medium text-gray-900">{subscription.name}</div>
-          {subscription.url && (
-            <a
-              href={subscription.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-blue-500 hover:underline"
-            >
-              Manage
-            </a>
-          )}
+          <div className="flex items-center gap-2.5">
+            <ServiceIcon name={subscription.name} url={subscription.url} />
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="font-medium text-gray-900">{subscription.name}</span>
+                {subscription.notes && (
+                  <NotesPopover notes={subscription.notes} />
+                )}
+              </div>
+              {subscription.url && (
+                <a
+                  href={subscription.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-500 hover:underline"
+                >
+                  Manage
+                </a>
+              )}
+            </div>
+          </div>
         </td>
         <td className="px-4 py-3 text-right font-mono text-gray-900">
           {sym}

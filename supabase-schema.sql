@@ -11,6 +11,7 @@ create table public.subscriptions (
   renewal_date date not null,
   url text,
   payment_method text,
+  notes text,
   created_at timestamptz default now() not null,
   updated_at timestamptz default now() not null
 );

@@ -19,6 +19,7 @@ export async function addSubscription(formData: FormData) {
   const renewal_date = formData.get("renewal_date") as string;
   const url = (formData.get("url") as string) || null;
   const payment_method = (formData.get("payment_method") as string) || null;
+  const notes = (formData.get("notes") as string) || null;
 
   const { error } = await supabase.from("subscriptions").insert({
     user_id: user.id,
@@ -29,6 +30,7 @@ export async function addSubscription(formData: FormData) {
     renewal_date,
     url,
     payment_method,
+    notes,
   });
 
   if (error) return { error: error.message };
@@ -60,10 +62,11 @@ export async function updateSubscription(formData: FormData) {
   const renewal_date = formData.get("renewal_date") as string;
   const url = (formData.get("url") as string) || null;
   const payment_method = (formData.get("payment_method") as string) || null;
+  const notes = (formData.get("notes") as string) || null;
 
   const { error } = await supabase
     .from("subscriptions")
-    .update({ name, amount, currency, period, renewal_date, url, payment_method })
+    .update({ name, amount, currency, period, renewal_date, url, payment_method, notes })
     .eq("id", id);
 
   if (error) return { error: error.message };
