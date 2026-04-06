@@ -2,7 +2,11 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { signInWithGoogle } from "./login/actions";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ deleted?: string }>;
+}) {
   const supabase = await createClient();
   const {
     data: { user },
@@ -12,9 +16,17 @@ export default async function Home() {
     redirect("/dashboard");
   }
 
+  const params = await searchParams;
+  const wasDeleted = params.deleted === "true";
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-white">
       <div className="text-center max-w-lg px-4">
+        {wasDeleted && (
+          <div className="mb-6 rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">
+            Your account has been successfully deleted.
+          </div>
+        )}
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Subscription Tracker
         </h1>
